@@ -1,0 +1,11 @@
+name: learn-github-actions
+on: [push]
+jobs:
+  check-bats-version:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "GITHUB_EVENT_NAME $GITHUB_EVENT_NAME"
+      - run: echo "GITHUB_EVENT_PATH $GITHUB_EVENT_PATH"
+      - run: echo "GITHUB_REF        $GITHUB_REF"
+      - run: echo "GITHUB_HEAD_REF   $GITHUB_HEAD_REF"
+      - run: echo "GITHUB_BASE_REF   $GITHUB_BASE_REF"
