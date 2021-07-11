@@ -14,4 +14,4 @@ jobs:
       - run: echo "GITHUB_HEAD_REF   $GITHUB_HEAD_REF"
       - run: echo "GITHUB_BASE_REF   $GITHUB_BASE_REF"
       - run: <$GITHUB_EVENT_PATH jq '.pull_request.head.ref'
-      - run: <$GITHUB_EVENT_PATH jq '.pull_request.head.merged'
+      - run: <$GITHUB_EVENT_PATH jq '.pull_request.merged'
