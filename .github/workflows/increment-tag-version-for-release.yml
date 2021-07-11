@@ -36,3 +36,6 @@ jobs:
           VERSION="$MAJOR_MINOR.$((PATCH + 1))"
 
           echo "version = $VERSION"
+
+          git tag "$VERSION" release
+          git push --tags origin
