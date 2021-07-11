@@ -13,3 +13,5 @@ jobs:
       - run: echo "GITHUB_REF        $GITHUB_REF"
       - run: echo "GITHUB_HEAD_REF   $GITHUB_HEAD_REF"
       - run: echo "GITHUB_BASE_REF   $GITHUB_BASE_REF"
+      - run: apt-get install jq
+      - run: <$GITHUB_EVENT_PATH jq --raw '.pull_request.head | (.ref, .merged)'
