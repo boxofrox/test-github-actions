@@ -25,4 +25,4 @@ if [[ -z "$LAST_COMMIT" ]]; then
 fi
 
 git log $FIRST_COMMIT^1..$LAST_COMMIT --format="%s" --reverse --no-merges \
-  | sed 's/(^.*$)/- \1/'
+  | sed 's/\(^.*$\)/- \1/'
