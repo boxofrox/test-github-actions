@@ -1,0 +1,41 @@
+name: increment-version-for-release
+on:
+  pull_request:
+    types: [closed]
+    branches: [ release ]
+jobs:
+  increment-version:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          ref: 'release'
+          fetch-depth: 0
+      - run: |
+          FROM_BRANCH=$(jq .pull_request.head.ref <$GITHUB_EVENT_PATH)
+          IS_MERGED=$(jq .pull_request.merged <$GITHUB_EVENT_PATH)
+
+          if [[ "true" != "$IS_MERGED" ]]; then
+            echo "Not merged.  Skip"
+            exit 0
+          fi
+
+          if [[ "dev" == "$FROM_BRANCH" ]]; then
+            echo "PR from dev.  Skip"
+            exit 0
+          fi
+
+          GIT_TAG=$(git describe --tags --abbrev=0 release)
+          MAJOR_MINOR=${GIT_TAG%%.[0-9]}
+          PATCH=${GIT_TAG##$MAJOR_MINOR.}
+
+          echo "tag = $GIT_TAG"
+          echo "major.minor = $MAJOR_MINOR"
+          echo "path = $PATCH"
+
+          VERSION="$MAJOR_MINOR.$((PATCH + 1))"
+
+          echo "version = $VERSION"
+
+          git tag "$VERSION" release
+          git push --tags origin
