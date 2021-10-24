@@ -1,6 +1,5 @@
 name: push-action
-on:
-  push:
+on: push
 jobs:
   check-bats-version:
     runs-on: ubuntu-latest
