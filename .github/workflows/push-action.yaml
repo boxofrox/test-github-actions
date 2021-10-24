@@ -1,0 +1,10 @@
+name: push-action
+on:
+  push:
+jobs:
+  check-bats-version:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "GITHUB_EVENT_NAME $GITHUB_EVENT_NAME"
+      - run: echo "GITHUB_EVENT_PATH $GITHUB_EVENT_PATH"
+      - run: cat "$GITHUB_EVENT_PATH"
